@@ -17,9 +17,8 @@ from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.metrics import (accuracy_score, precision_score, recall_score, 
                              f1_score, confusion_matrix, classification_report)
 
-# =================================================================
 # PHASE 1 & 2: BUSINESS & DATA UNDERSTANDING
-# =================================================================
+
 
 def display_project_goals():
     """Prints a quick summary of what we are trying to achieve."""
@@ -37,9 +36,8 @@ def load_dataset(filename):
     print(f"Records: {df.shape[0]} | Features: {df.shape[1]}")
     return df
 
-# =================================================================
 # PHASE 3: DATA PREPARATION (CLEANING & ENCODING)
-# =================================================================
+
 
 def clean_and_prepare_data(df):
     """
@@ -47,25 +45,25 @@ def clean_and_prepare_data(df):
     """
     print("\n--- PHASE 3: DATA PREPARATION ---")
     
-    # 1. Handling Duplicates: We remove these so the model doesn't overfit to repeated data.
+    # 1. Handling Duplicates: i remove these so the model doesn't overfit to repeated data.
     original_size = len(df)
     df = df.drop_duplicates()
     print(f"Cleaned {original_size - len(df)} duplicate records.")
 
     # 2. Handling Missing Values: 
-    # We use 'median' for numbers because it is robust against outliers.
+    # i use 'median' for numbers because it is robust against outliers.
     num_cols = df.select_dtypes(include=np.number).columns
     df[num_cols] = df[num_cols].fillna(df[num_cols].median())
 
     # 3. Categorical Encoding:
-    # Models only understand numbers, so we turn words into columns using One-Hot Encoding.
+    # Models only understand numbers, so i turned words into columns using One-Hot Encoding.
     df = pd.get_dummies(df, drop_first=True)
 
     # 4. Feature Scaling:
-    # We use StandardScaler so features like 'src_bytes' (large numbers) 
+    # i use StandardScaler so features like 'src_bytes' (large numbers) 
     # don't dominate features with small numbers.
     scaler = StandardScaler()
-    # We don't want to scale our target 'class_normal', just the features.
+    # i don't want to scale our target 'class_normal', just the features.
     target_col = 'class_normal'
     features = [col for col in df.columns if col != target_col]
     
@@ -74,9 +72,9 @@ def clean_and_prepare_data(df):
     print("Data cleaning, encoding, and scaling complete.")
     return df
 
-# =================================================================
+
 # PHASE 4 & 5: MODELLING & EVALUATION
-# =================================================================
+
 
 def train_and_evaluate_model(df):
     """
@@ -89,12 +87,12 @@ def train_and_evaluate_model(df):
     X = df.drop(columns=[target])
     y = df[target]
     
-    # We split 80% for training and 20% for testing to see how it handles new data.
+    # i split 80% for training and 20% for testing to see how it handles new data.
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42, stratify=y
     )
     
-    # We chose Random Forest because it handles complex network traffic patterns well.
+    # i chose Random Forest because it handles complex network traffic patterns i'll.
     print("Training Random Forest Classifier...")
     model = RandomForestClassifier(n_estimators=100, random_state=42)
     model.fit(X_train, y_train)
@@ -112,9 +110,9 @@ def train_and_evaluate_model(df):
     
     return model, X_test, y_test
 
-# =================================================================
+
 # PHASE 6: DEPLOYMENT (SAVING THE MODEL)
-# =================================================================
+
 
 def deploy_system(model):
     """
@@ -126,15 +124,14 @@ def deploy_system(model):
     print(f"Model serialized and saved as '{model_filename}' for production use.")
     print("Project successfully completed following CRISP-DM standards.")
 
-# =================================================================
+
 # MAIN ENGINE
-# =================================================================
 
 if __name__ == "__main__":
     # Step 1: Initialize the project
     display_project_goals()
     
-    # Step 2: Load the data (Make sure the CSV is in the same folder!)
+    # Step 2: Load the data 
     raw_data = load_dataset("Train_data.csv")
     
     if raw_data is not None:
