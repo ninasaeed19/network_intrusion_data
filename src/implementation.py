@@ -1,6 +1,6 @@
 """
 Project: Network Intrusion Detection System (NIDS)
-Approach: CRISP-DM Methodology
+
 
 """
 
@@ -21,11 +21,9 @@ from sklearn.metrics import (accuracy_score, precision_score, recall_score,
 
 
 def display_project_goals():
-    """Prints a quick summary of what we are trying to achieve."""
     print("--- PHASE 1: BUSINESS UNDERSTANDING ---")
-    print("Goal: Build an ML model to detect network attacks with high recall.")
-    print("Success Criteria: Achieve >90% recall to ensure no attacks are missed.\n")
-
+    print("Goal: Build an ML model to solve alert fatigue.")
+    print("Success Criteria: Achieve a False Positive Rate < 1%.\n")
 def load_dataset(filename):
     """Loads the raw CSV data."""
     if not os.path.exists(filename):
@@ -92,7 +90,7 @@ def train_and_evaluate_model(df):
         X, y, test_size=0.2, random_state=42, stratify=y
     )
     
-    # i chose Random Forest because it handles complex network traffic patterns i'll.
+    # i chose Random Forest because it handles complex network traffic patterns well
     print("Training Random Forest Classifier...")
     model = RandomForestClassifier(n_estimators=100, random_state=42)
     model.fit(X_train, y_train)

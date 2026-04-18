@@ -5,3 +5,4 @@ scikit-learn
 requests
 beautifulsoup4
 lxml
+"run this for scraping " pip install requests beautifulsoup4 pandas lxml
