@@ -21,7 +21,7 @@ from sklearn.metrics import (accuracy_score, precision_score, recall_score,
 
 
 def display_project_goals():
-    print("--- PHASE 1: BUSINESS UNDERSTANDING ---")
+    print("PHASE 1: BUSINESS UNDERSTANDING ")
     print("Goal: Build an ML model to solve alert fatigue.")
     print("Success Criteria: Achieve a False Positive Rate < 1%.\n")
 def load_dataset(filename):
@@ -30,7 +30,7 @@ def load_dataset(filename):
         print(f"Error: {filename} not found in the directory.")
         return None
     df = pd.read_csv(filename)
-    print(f"--- PHASE 2: DATA LOADED ---")
+    print(f" PHASE 2: DATA LOADED ")
     print(f"Records: {df.shape[0]} | Features: {df.shape[1]}")
     return df
 
@@ -41,7 +41,7 @@ def clean_and_prepare_data(df):
     """
     Cleans the data to make it ready for the Machine Learning models.
     """
-    print("\n--- PHASE 3: DATA PREPARATION ---")
+    print("\n PHASE 3: DATA PREPARATION ")
     
     # 1. Handling Duplicates: i remove these so the model doesn't overfit to repeated data.
     original_size = len(df)
@@ -78,7 +78,7 @@ def train_and_evaluate_model(df):
     """
     Splits the data, trains the Random Forest, and checks performance.
     """
-    print("\n--- PHASE 4 & 5: MODELLING & EVALUATION ---")
+    print("\nPHASE 4 & 5: MODELLING & EVALUATION ")
     
     # Defining features (X) and target (y)
     target = 'class_normal'
@@ -116,7 +116,7 @@ def deploy_system(model):
     """
     Saves the model as a file so it can be used in a real security dashboard.
     """
-    print("\n--- PHASE 6: DEPLOYMENT ---")
+    print("\nPHASE 6: DEPLOYMENT ")
     model_filename = 'intrusion_detection_model.pkl'
     joblib.dump(model, model_filename)
     print(f"Model serialized and saved as '{model_filename}' for production use.")
@@ -130,8 +130,7 @@ if __name__ == "__main__":
     display_project_goals()
     
     # Step 2: Load the data 
-    raw_data = load_dataset("Train_data.csv")
-    
+    raw_data = load_dataset("src/Train_data.csv")
     if raw_data is not None:
         # Step 3: Run the cleaning pipeline
         processed_data = clean_and_prepare_data(raw_data)
