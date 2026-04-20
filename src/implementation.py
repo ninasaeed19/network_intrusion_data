@@ -1,7 +1,6 @@
 """
 Project: Network Intrusion Detection System (NIDS)
 
-
 """
 
 import pandas as pd
@@ -130,7 +129,7 @@ if __name__ == "__main__":
     display_project_goals()
     
     # Step 2: Load the data 
-    raw_data = load_dataset("src/Train_data.csv")
+    raw_data = load_dataset("Train_data.csv")
     if raw_data is not None:
         # Step 3: Run the cleaning pipeline
         processed_data = clean_and_prepare_data(raw_data)

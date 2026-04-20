@@ -29,4 +29,4 @@ def scrape_port_data():
         return f"Could not scrape StationX: {e}"
 if __name__ == "__main__":
     result = scrape_port_data()
-    print(result) # <--- THIS IS THE MAGIC LINE
+    print(result) 
